@@ -56,65 +56,44 @@ return {
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
     mappings = {
       -- first key is the mode
-      i = {
-        ["<C-v>"] = { "<C-r>+" },
-      },
       n = {
         -- second key is the lefthand side of the map
 
-        -- navigate buffer tabs with `H` and `L
-        L = {
-          function() require("astrocore.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
-          desc = "Next buffer",
-        },
-        H = {
-          function() require("astrocore.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
-          desc = "Previous buffer",
+        -- navigate buffer tabs
+        -- mappings seen under group name "Buffer"
+        ["<Leader>bd"] = {
+          function()
+            require("astroui.status.heirline").buffer_picker(
+              function(bufnr) require("astrocore.buffer").close(bufnr) end
+            )
+          end,
+          desc = "Close buffer from tabline",
         },
 
-        -- mappings seen under group name "Buffer"
-        -- ["<Leader>bD"] = {
-        --   function()
-        --     require("astroui.status.heirline").buffer_picker(
-        --       function(bufnr) require("astrocore.buffer").close(bufnr) end
-        --     )
-        --   end,
-        --   desc = "Pick to close",
-        -- },
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
-        ["<Leader>b"] = { desc = "Buffers" },
-        -- quick save
-        -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
-        ["<leader>bd"] = { "<cmd>BufferLinePickClose<cr>", desc = "Pick to close" },
-        ["<leader>bp"] = { "<cmd>BufferLinePick<cr>", desc = "Pick buffer" },
+        -- ["<Leader>b"] = { desc = "Buffers" },
 
-        -- Clipboard
-        -- ["<leader>yy"] = { '"+yy' },
-        -- ["<leader>p"] = { '"+p' },
-        -- neotree
-        ["<leader>E"] = { "<cmd>Neotree toggle buffers<cr>", desc = "Toggle Buffers Explorer" },
-        -- select all
-        ["<C-a>"] = { "ggVG" },
-        -- redo
-        ["U"] = { "<C-r>" },
-        -- move line
-        ["<C-S-J>"] = { ":m .+1<cr>gv=gv" },
-        ["<C-S-K>"] = { ":m .-2<cr>gv=gv" },
-      },
-      t = {
         -- setting a mapping to false will disable it
-        -- ["<esc>"] = false,
+        -- ["<C-S>"] = false,
+
+        -- my keymapping
+        ["L"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
+        ["H"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
+        ["gh"] = { "^", desc = "First non-blank in line" },
+        ["gl"] = { "$", desc = "End of line" },
+        -- redo
+        ["U"] = { "<C-r>", desc = "Undo" },
+        ["<Leader>fm"] = { function() vim.lsp.buf.format() end, desc = "Format buffer" },
+        -- move line
+        ["<C-S-J>"] = { ":m .+1<CR>==", desc = "Move line up" },
+        ["<C-S-K>"] = { ":m .-2<CR>==", desc = "Move line down" },
       },
       v = {
-        -- move multiple lines
-        ["<C-S-J>"] = { ":m '>+1<cr>gv=gv" },
-        ["<C-S-K>"] = { ":m '<-2<cr>gv=gv" },
-        -- Clipboard
-        -- ["<leader>y"] = { '"+y' },
-        -- ["<leader>p"] = { '"+p' },
-        -- ["<C-c>"] = { '"+y' },
-        -- ["<C-v>"] = { '"+p' },
+        ["<C-S-J>"] = { ":m '>+1<CR>gv=gv", desc = "Move block up" },
+        ["<C-S-K>"] = { ":m '<-2<CR>gv=gv", desc = "Move block down" },
+        ["gh"] = { "^", desc = "First non-blank in line" },
+        ["gl"] = { "$", desc = "End of line" },
       },
     },
   },

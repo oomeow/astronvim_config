@@ -9,16 +9,8 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.lua" },
   -- import/override with your plugins folder
-  { import = "astrocommunity.colorscheme.rose-pine" },
+
   { import = "astrocommunity.colorscheme.catppuccin" },
-
-  { import = "astrocommunity.pack.bash" },
-  { import = "astrocommunity.pack.lua" },
-  { import = "astrocommunity.pack.json" },
-  { import = "astrocommunity.pack.yaml" },
-  { import = "astrocommunity.pack.python" },
-  { import = "astrocommunity.pack.rust" },
-
   { import = "astrocommunity.bars-and-lines.bufferline-nvim" },
   {
     "akinsho/bufferline.nvim",

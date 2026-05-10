@@ -17,7 +17,7 @@ rm -rf ~/.cache/nvim
 ```
 
 #### Windows
-```
+```shell
 # powershell
 Move-Item $env:LOCALAPPDATA\nvim $env:LOCALAPPDATA\nvim.bak
 Remove-Item -Recurse -Force $env:LOCALAPPDATA\nvim-data
@@ -35,7 +35,7 @@ git clone https://github.com/oomeow/astronvim_config.git ~/.config/nvim
 ```
 
 #### Windows
-```
+```shell
 # powershell
 git clone --depth 1 https://github.com/oomeow/astronvim_config.git $env:LOCALAPPDATA\nvim
 
